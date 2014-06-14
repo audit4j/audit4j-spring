@@ -1,11 +1,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.bi3.commons.audit</groupId>
-	<artifactId>bi3-commons-audit</artifactId>
+	<groupId>org.audit4j.integration.spring</groupId>
+	<artifactId>audit4j-spring</artifactId>
 	<packaging>jar</packaging>
-	<version>1.0-SNAPSHOT</version>
-	<name>Brandix_i3-Common_Components</name>
+	<version>2.0-SNAPSHOT</version>
+	<name>Audit4j - Spring Integration</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
@@ -13,6 +13,7 @@
 		<slf4j.version>1.7.5</slf4j.version>
 		<log4j.version>1.2.17</log4j.version>
 		<spring.version>3.0.5.RELEASE</spring.version>
+		<aspectj.version>1.6.11</aspectj.version>
 	</properties>
 
 	<dependencies>
@@ -37,12 +38,12 @@
 		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjrt</artifactId>
-			<version>1.6.11</version>
+			<version>${aspectj.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjweaver</artifactId>
-			<version>1.6.11</version>
+			<version>${aspectj.version}</version>
 		</dependency>
 	</dependencies>
 
