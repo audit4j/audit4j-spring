@@ -24,16 +24,44 @@ import java.lang.reflect.Method;
 import org.audit4j.core.AuditManager;
 import org.springframework.aop.MethodBeforeAdvice;
 
-
 /**
  * The Class AuditAdvice.
  * 
- * @author Janith Bandara
+ * <p>
+ * </p>
+ * Usage:
+ * 
+ * <pre>
+ * {@code
+ * <bean id="auditAdvice" class="org.audit4j.integration.spring.AuditAdvice" />
+ * 
+ * <bean id="serviceClass" class="com.xyz.myapp.service.ServiceImpl">
+ *      <!-- properties here -->
+ * </bean>
+ * 
+ * <bean id="serviceImplProxy" 
+ *                  class="org.springframework.aop.framework.ProxyFactoryBean">
+ *         <property name="target" ref="serviceClass" />
+ *  
+ *         <property name="interceptorNames">
+ *             <list>
+ *                 <value>auditAdvice</value>
+ *             </list>
+ *         </property>
+ *   </bean>
+ * }
+ * </pre>
+ * 
+ * @author <a href="mailto:janith3000@gmail.com">Janith Bandara</a>
  */
 public class AuditAdvice implements MethodBeforeAdvice {
 
-    /* (non-Javadoc)
-     * @see org.springframework.aop.MethodBeforeAdvice#before(java.lang.reflect.Method, java.lang.Object[], java.lang.Object)
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.springframework.aop.MethodBeforeAdvice#before(java.lang.reflect.Method
+     * , java.lang.Object[], java.lang.Object)
      */
     @Override
     public void before(final Method method, final Object[] arg1, final Object arg2) throws Throwable {

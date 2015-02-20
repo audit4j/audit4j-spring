@@ -1,7 +1,8 @@
+package org.audit4j.integration.spring;
+
 /*
- * Copyright 2014 Janith Bandara, This source is a part of Audit4j - 
- * An open-source audit platform for Enterprise java platform.
- * http://mechanizedspace.com/audit4j
+ * Copyright (c) 2014-2015 Janith Bandara, This source is a part of
+ * Audit4j - An open source auditing framework.
  * http://audit4j.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,50 +18,48 @@
  * limitations under the License.
  */
 
-package org.audit4j.integration.spring;
-
 import java.lang.reflect.Method;
 
-import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.Around;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.audit4j.core.AuditManager;
 
-
-
 /**
  * The Class AuditAspect.
+ * <p>
+ * Configuration:
+ * </p>
  * 
- * @author Janith Bandara
+ * <pre>
+ * {@code
+ * <aop:config>
+ *     <aop:aspect id="audit" ref="auditAspect">
+ *         <aop:pointcut id="packages"
+ *             expression="execution(* com.xyz.myapp.service.*.*(..))" />
+ *         <aop:before pointcut-ref="packages" method="audit" />
+ *     </aop:aspect>
+ * </aop:config>
+ * 
+ * <bean id="auditAspect" class="org.audit4j.integration.spring.AuditAspect"/>
+ * }
+ * </pre>
+ * 
+ * @author <a href="mailto:janith3000@gmail.com">Janith Bandara</a>
  */
-@Aspect
 public class AuditAspect {
 
     /**
-     * Execute public method.
-     */
-    @Pointcut(value = "execution(public * *(..))")
-    public void executePublicMethod() {
-    }
-
-    /**
-     * Log action.
+     * Audit.
      *
-     * @param pjp the pjp
+     * @param jointPoint the pjp
      * @return the object
      * @throws Throwable the throwable
      */
-    @Around("executePublicMethod()")
-    public Object logAction(final ProceedingJoinPoint pjp) throws Throwable {
-    	AuditManager manager = AuditManager.getInstance();
-    	Class<?> clazz = pjp.getClass();
-
-    	MethodSignature methodSignature = (MethodSignature) pjp.getSignature();
-    	Method method = methodSignature.getMethod();
-    	
-    	manager.audit(clazz, method, pjp.getArgs());
-        return pjp.proceed();
+    public void audit (final JoinPoint jointPoint) throws Throwable {
+        AuditManager manager = AuditManager.getInstance();
+        Class<?> clazz = jointPoint.getClass();
+        MethodSignature methodSignature = (MethodSignature) jointPoint.getSignature();
+        Method method = methodSignature.getMethod();
+        manager.audit(clazz, method, jointPoint.getArgs());
     }
 }
