@@ -28,9 +28,8 @@ import org.springframework.aop.MethodBeforeAdvice;
  * The Class AuditAdvice.
  * 
  * <p>
- * </p>
  * Usage:
- * 
+ * </p>
  * <pre>
  * {@code
  * <bean id="auditAdvice" class="org.audit4j.integration.spring.AuditAdvice" />
@@ -64,8 +63,8 @@ public class AuditAdvice implements MethodBeforeAdvice {
      * , java.lang.Object[], java.lang.Object)
      */
     @Override
-    public void before(final Method method, final Object[] arg1, final Object arg2) throws Throwable {
+    public void before(final Method method, final Object[] params, final Object arg2) throws Throwable {
         AuditManager manager = AuditManager.getInstance();
-        manager.audit(method.getClass(), method, arg1);
+        manager.audit(method.getClass(), method, params);
     }
 }

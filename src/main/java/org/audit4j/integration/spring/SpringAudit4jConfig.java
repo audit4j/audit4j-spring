@@ -56,13 +56,13 @@ public class SpringAudit4jConfig implements InitializingBean, DisposableBean {
      */
     @Override
     public void afterPropertiesSet() throws Exception {
-        Configuration configuration = new Configuration();
+        Configuration configuration = Configuration.INSTANCE;
         configuration.setLayout(layout);
         configuration.setHandlers(handlers);
         configuration.setMetaData(metaData);
         configuration.setFilters(filters);
         configuration.setOptions(options);
-        AuditManager.getConfigurationInstance(configuration);
+        AuditManager.startWithConfiguration(configuration);
     }
 
     /* (non-Javadoc)
