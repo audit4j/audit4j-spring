@@ -1,5 +1,3 @@
-package org.audit4j.integration.spring;
-
 /*
  * Copyright (c) 2014-2015 Janith Bandara, This source is a part of
  * Audit4j - An open source auditing framework.
@@ -17,6 +15,8 @@ package org.audit4j.integration.spring;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+package org.audit4j.integration.spring;
 
 import java.lang.reflect.Method;
 
@@ -53,12 +53,14 @@ public class AuditAspectOld {
 
     /**
      * Audit.
-     *
-     * @param jointPoint the pjp
      * 
-     * @throws Throwable the throwable
+     * @param jointPoint
+     *            the pjp
+     * 
+     * @throws Throwable
+     *             the throwable
      */
-    public void audit (final JoinPoint jointPoint) throws Throwable {
+    public void audit(final JoinPoint jointPoint) throws Throwable {
         MethodSignature methodSignature = (MethodSignature) jointPoint.getSignature();
         Method method = methodSignature.getMethod();
         AuditManager.getInstance().audit(jointPoint.getTarget().getClass(), method, jointPoint.getArgs());

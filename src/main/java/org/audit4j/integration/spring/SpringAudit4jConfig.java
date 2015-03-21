@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 Janith Bandara, This source is a part of 
+ * Copyright (c) 2014-2015 Janith Bandara, This source is a part of
  * Audit4j - An open source auditing framework.
  * http://audit4j.org
  *
@@ -51,8 +51,12 @@ public class SpringAudit4jConfig implements InitializingBean, DisposableBean {
     /** The options. */
     private String options;
     
-    /* (non-Javadoc)
+
+    /**
+     * {@inheritDoc}
+     * 
      * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
+     *
      */
     @Override
     public void afterPropertiesSet() throws Exception {
@@ -65,8 +69,12 @@ public class SpringAudit4jConfig implements InitializingBean, DisposableBean {
         AuditManager.startWithConfiguration(configuration);
     }
 
-    /* (non-Javadoc)
+
+    /**
+     * {@inheritDoc}
+     * 
      * @see org.springframework.beans.factory.DisposableBean#destroy()
+     *
      */
     @Override
     public void destroy() throws Exception {

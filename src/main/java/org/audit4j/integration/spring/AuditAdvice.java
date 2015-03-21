@@ -1,7 +1,6 @@
 /*
- * Copyright 2014 Janith Bandara, This source is a part of Audit4j - 
- * An open-source audit platform for Enterprise java platform.
- * http://mechanizedspace.com/audit4j
+ * Copyright (c) 2014-2015 Janith Bandara, This source is a part of
+ * Audit4j - An open source auditing framework.
  * http://audit4j.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -55,12 +54,12 @@ import org.springframework.aop.MethodBeforeAdvice;
  */
 public class AuditAdvice implements MethodBeforeAdvice {
 
-    /*
-     * (non-Javadoc)
+
+    /**
+     * {@inheritDoc}
      * 
-     * @see
-     * org.springframework.aop.MethodBeforeAdvice#before(java.lang.reflect.Method
-     * , java.lang.Object[], java.lang.Object)
+     * @see org.springframework.aop.MethodBeforeAdvice#before(java.lang.reflect.Method, java.lang.Object[], java.lang.Object)
+     *
      */
     @Override
     public void before(final Method method, final Object[] params, final Object arg2) throws Throwable {
