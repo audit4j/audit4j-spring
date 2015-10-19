@@ -78,7 +78,7 @@ public class SpringAudit4jConfig implements InitializingBean, DisposableBean {
      */
     @Override
     public void destroy() throws Exception {
-        AuditManager.shutdown();
+        AuditManager.getInstance().shutdown();
     }
 
     /**
@@ -118,11 +118,6 @@ public class SpringAudit4jConfig implements InitializingBean, DisposableBean {
     }
 
 
-    /**
-     * Sets the commands.
-     *
-     * @param commands the new commands
-     */
     public void setCommands(String commands) {
         this.commands = commands;
     }
