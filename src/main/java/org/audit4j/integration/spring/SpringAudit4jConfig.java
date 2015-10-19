@@ -49,7 +49,7 @@ public class SpringAudit4jConfig implements InitializingBean, DisposableBean {
     private List<AuditEventFilter> filters;
     
     /** The options. */
-    private String options;
+    private String commands;
     
 
     /**
@@ -65,7 +65,7 @@ public class SpringAudit4jConfig implements InitializingBean, DisposableBean {
         configuration.setHandlers(handlers);
         configuration.setMetaData(metaData);
         configuration.setFilters(filters);
-        configuration.setOptions(options);
+        configuration.setCommands(commands);
         AuditManager.startWithConfiguration(configuration);
     }
 
@@ -78,7 +78,7 @@ public class SpringAudit4jConfig implements InitializingBean, DisposableBean {
      */
     @Override
     public void destroy() throws Exception {
-        AuditManager.getInstance().shutdown();
+        AuditManager.shutdown();
     }
 
     /**
@@ -117,12 +117,13 @@ public class SpringAudit4jConfig implements InitializingBean, DisposableBean {
         this.filters = filters;
     }
 
+
     /**
-     * Sets the options.
+     * Sets the commands.
      *
-     * @param options the new options
+     * @param commands the new commands
      */
-    public void setOptions(String options) {
-        this.options = options;
+    public void setCommands(String commands) {
+        this.commands = commands;
     }
 }
