@@ -68,10 +68,10 @@ public class AuditAspect {
                         .getDeclaredMethod(jointPoint.getSignature().getName(), method.getParameterTypes());
             } catch (final SecurityException exception) {
                 throw new Audit4jRuntimeException(
-                        "Exception happend proceding Audit Aspect in Audit4j Spring Integration", exception);
+                        "Exception occured while proceding Audit Aspect in Audit4j Spring Integration", exception);
             } catch (final NoSuchMethodException exception) {
                 throw new Audit4jRuntimeException(
-                        "Exception happend proceding Audit Aspect in Audit4j Spring Integration", exception);
+                        "Exception occured while proceding Audit Aspect in Audit4j Spring Integration", exception);
             }
         }
 
