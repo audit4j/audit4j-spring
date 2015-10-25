@@ -53,7 +53,8 @@
 	<properties>
 		<junit.version>4.11</junit.version>
 		<audit4j.version>2.4.0-alpha3</audit4j.version>
-		<spring.version>4.1.4.RELEASE</spring.version>
+		<spring.version>4.2.2.RELEASE</spring.version>
+		<aspectj.version>1.8.7</aspectj.version>
 	</properties>
 
 	<dependencies>
@@ -84,7 +85,7 @@
 		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjrt</artifactId>
-			<version>1.8.5</version>
+			<version>${aspectj.version>}</version>
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>
