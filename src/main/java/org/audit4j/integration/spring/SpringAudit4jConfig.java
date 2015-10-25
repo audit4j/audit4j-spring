@@ -25,13 +25,14 @@ import org.audit4j.core.Configuration;
 import org.audit4j.core.MetaData;
 import org.audit4j.core.filter.AuditEventFilter;
 import org.audit4j.core.handler.Handler;
+import org.audit4j.core.jmx.JMXConfig;
 import org.audit4j.core.layout.Layout;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 
 /**
  * The Class SpringAudit4jConfig.
- *
+ * 
  * @author <a href="mailto:janith3000@gmail.com">Janith Bandara</a>
  */
 public class SpringAudit4jConfig implements InitializingBean, DisposableBean {
@@ -44,19 +45,21 @@ public class SpringAudit4jConfig implements InitializingBean, DisposableBean {
 
     /** The meta data. */
     private MetaData metaData;
-    
+
     /** The filters. */
     private List<AuditEventFilter> filters;
-    
-    /** The options. */
+
+    /** The commands. */
     private String commands;
     
+    /** The jmx. */
+    private JMXConfig jmx;
 
     /**
      * {@inheritDoc}
      * 
      * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
-     *
+     * 
      */
     @Override
     public void afterPropertiesSet() throws Exception {
@@ -66,15 +69,15 @@ public class SpringAudit4jConfig implements InitializingBean, DisposableBean {
         configuration.setMetaData(metaData);
         configuration.setFilters(filters);
         configuration.setCommands(commands);
+        configuration.setJmx(jmx);
         AuditManager.startWithConfiguration(configuration);
     }
-
 
     /**
      * {@inheritDoc}
      * 
      * @see org.springframework.beans.factory.DisposableBean#destroy()
-     *
+     * 
      */
     @Override
     public void destroy() throws Exception {
@@ -83,8 +86,9 @@ public class SpringAudit4jConfig implements InitializingBean, DisposableBean {
 
     /**
      * Sets the layout.
-     *
-     * @param layout the new layout
+     * 
+     * @param layout
+     *            the new layout
      */
     public void setLayout(Layout layout) {
         this.layout = layout;
@@ -92,8 +96,9 @@ public class SpringAudit4jConfig implements InitializingBean, DisposableBean {
 
     /**
      * Sets the meta data.
-     *
-     * @param metaData the new meta data
+     * 
+     * @param metaData
+     *            the new meta data
      */
     public void setMetaData(MetaData metaData) {
         this.metaData = metaData;
@@ -101,8 +106,9 @@ public class SpringAudit4jConfig implements InitializingBean, DisposableBean {
 
     /**
      * Sets the handlers.
-     *
-     * @param handlers the new handlers
+     * 
+     * @param handlers
+     *            the new handlers
      */
     public void setHandlers(List<Handler> handlers) {
         this.handlers = handlers;
@@ -110,15 +116,31 @@ public class SpringAudit4jConfig implements InitializingBean, DisposableBean {
 
     /**
      * Sets the filters.
-     *
-     * @param filters the new filters
+     * 
+     * @param filters
+     *            the new filters
      */
     public void setFilters(List<AuditEventFilter> filters) {
         this.filters = filters;
     }
 
-
+    /**
+     * Sets the commands.
+     * 
+     * @param commands
+     *            the new commands
+     */
     public void setCommands(String commands) {
         this.commands = commands;
     }
+
+    /**
+     * Sets the jmx.
+     *
+     * @param jmx the new jmx
+     */
+    public void setJmx(JMXConfig jmx) {
+        this.jmx = jmx;
+    }
+
 }

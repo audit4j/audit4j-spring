@@ -23,9 +23,9 @@ import java.lang.reflect.Method;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.audit4j.core.AuditManager;
+import org.audit4j.core.exception.Audit4jRuntimeException;
 
 /**
  * The Class AuditAspect.
@@ -49,32 +49,32 @@ import org.audit4j.core.AuditManager;
 public class AuditAspect {
 
     /**
-     * Execute public method.
-     */
-    @Pointcut("execution(@org.audit4j.core.annotation.Audit * *(..))")
-    public void executeAuditMethod() {
-    }
-
-    /**
-     * Execute audit class.
-     */
-    @Pointcut("within(@org.audit4j.core.annotation.Audit *)")
-    public void executeAuditClass() {
-    }
-
-    /**
-     * Audit Aspect
+     * Audit Aspect.
      * 
-     * @param pjp
-     *            the pjp
-     * 
+     * @param jointPoint
+     *            the joint point
      * @throws Throwable
      *             the throwable
      */
-    @Before("executeAuditMethod() || executeAuditClass()")
-    public void audit(final JoinPoint pjp) throws Throwable {
-        MethodSignature methodSignature = (MethodSignature) pjp.getSignature();
+    @Before("@within(org.audit4j.core.annotation.Audit) || @annotation(org.audit4j.core.annotation.Audit))")
+    public void audit(final JoinPoint jointPoint) throws Throwable {
+
+        MethodSignature methodSignature = (MethodSignature) jointPoint.getSignature();
         Method method = methodSignature.getMethod();
-        AuditManager.getInstance().audit(pjp.getTarget().getClass(), method, pjp.getArgs());
+
+        if (method.getDeclaringClass().isInterface()) {
+            try {
+                method = jointPoint.getTarget().getClass()
+                        .getDeclaredMethod(jointPoint.getSignature().getName(), method.getParameterTypes());
+            } catch (final SecurityException exception) {
+                throw new Audit4jRuntimeException(
+                        "Exception happend proceding Audit Aspect in Audit4j Spring Integration", exception);
+            } catch (final NoSuchMethodException exception) {
+                throw new Audit4jRuntimeException(
+                        "Exception happend proceding Audit Aspect in Audit4j Spring Integration", exception);
+            }
+        }
+
+        AuditManager.getInstance().audit(jointPoint.getTarget().getClass(), method, jointPoint.getArgs());
     }
 }
