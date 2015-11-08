@@ -54,6 +54,8 @@ public class SpringAudit4jConfig implements InitializingBean, DisposableBean {
     
     /** The jmx. */
     private JMXConfig jmx;
+    
+    private String actorSessionAttributeName;
 
     /**
      * {@inheritDoc}
@@ -66,10 +68,20 @@ public class SpringAudit4jConfig implements InitializingBean, DisposableBean {
         Configuration configuration = Configuration.INSTANCE;
         configuration.setLayout(layout);
         configuration.setHandlers(handlers);
-        configuration.setMetaData(metaData);
+        
         configuration.setFilters(filters);
         configuration.setCommands(commands);
         configuration.setJmx(jmx);
+        
+        if (metaData == null) {
+            if (actorSessionAttributeName == null) {
+                configuration.setMetaData(new SpringSecurityWebAuditMetaData());
+            } else {
+                configuration.setMetaData(new WebSessionAuditMetaData());
+            }
+        } else {
+            configuration.setMetaData(metaData);
+        }
         AuditManager.startWithConfiguration(configuration);
     }
 
@@ -143,4 +155,7 @@ public class SpringAudit4jConfig implements InitializingBean, DisposableBean {
         this.jmx = jmx;
     }
 
+    public void setActorSessionAttributeName(String actorSessionAttributeName) {
+        this.actorSessionAttributeName = actorSessionAttributeName;
+    }
 }
