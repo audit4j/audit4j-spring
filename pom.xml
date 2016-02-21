@@ -54,6 +54,7 @@
 		<junit.version>4.11</junit.version>
 		<audit4j.version>2.4.0</audit4j.version>
 		<spring.version>4.2.2.RELEASE</spring.version>
+		<spring.security.version>4.0.3.RELEASE</spring.security.version>
 		<aspectj.version>1.8.7</aspectj.version>
 	</properties>
 
@@ -78,6 +79,22 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-aop</artifactId>
 			<version>${spring.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- Spring Web -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${spring.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- Spring Security -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>${spring.security.version}</version>
 			<scope>provided</scope>
 		</dependency>
 

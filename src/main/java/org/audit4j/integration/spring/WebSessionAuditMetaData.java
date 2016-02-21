@@ -29,8 +29,8 @@ public class WebSessionAuditMetaData extends SpringWebAuditMetadata {
      */
     @Override
     public String getActor() {
-        String actor = (String) RequestContextHolder.currentRequestAttributes().getAttribute(actorSessionAttribute,
-                RequestAttributes.SCOPE_SESSION);
+        String actor = (String) RequestContextHolder.currentRequestAttributes()
+                .getAttribute(actorSessionAttribute, RequestAttributes.SCOPE_SESSION);
         if (actor != null) {
             return actor;
         }
@@ -46,5 +46,4 @@ public class WebSessionAuditMetaData extends SpringWebAuditMetadata {
     public void setActorSessionAttribute(String actorSessionAttribute) {
         this.actorSessionAttribute = actorSessionAttribute;
     }
-
 }

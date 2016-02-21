@@ -51,28 +51,29 @@ public class SpringAudit4jConfig implements InitializingBean, DisposableBean {
 
     /** The commands. */
     private String commands;
-    
+
     /** The jmx. */
     private JMXConfig jmx;
-    
+
+    /** The actor session attribute name. */
     private String actorSessionAttributeName;
 
     /**
+     * Initialize audit4j when starting spring application context.
+     * 
      * {@inheritDoc}
      * 
      * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
-     * 
      */
     @Override
     public void afterPropertiesSet() throws Exception {
         Configuration configuration = Configuration.INSTANCE;
         configuration.setLayout(layout);
         configuration.setHandlers(handlers);
-        
         configuration.setFilters(filters);
         configuration.setCommands(commands);
         configuration.setJmx(jmx);
-        
+
         if (metaData == null) {
             if (actorSessionAttributeName == null) {
                 configuration.setMetaData(new SpringSecurityWebAuditMetaData());
@@ -93,7 +94,7 @@ public class SpringAudit4jConfig implements InitializingBean, DisposableBean {
      */
     @Override
     public void destroy() throws Exception {
-        AuditManager.getInstance().shutdown();
+        AuditManager.shutdown();
     }
 
     /**
@@ -149,12 +150,18 @@ public class SpringAudit4jConfig implements InitializingBean, DisposableBean {
     /**
      * Sets the jmx.
      *
-     * @param jmx the new jmx
+     * @param jmx
+     *            the new jmx
      */
     public void setJmx(JMXConfig jmx) {
         this.jmx = jmx;
     }
 
+    /**
+     * Sets the actor session attribute name.
+     *
+     * @param actorSessionAttributeName the new actor session attribute name
+     */
     public void setActorSessionAttributeName(String actorSessionAttributeName) {
         this.actorSessionAttributeName = actorSessionAttributeName;
     }
