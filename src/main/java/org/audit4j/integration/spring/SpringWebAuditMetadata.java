@@ -1,3 +1,21 @@
+/*
+ * Copyright (c) 2014-2016 Janith Bandara, This source is a part of
+ * Audit4j - An open source auditing framework.
+ * http://audit4j.org
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package org.audit4j.integration.spring;
 
 import javax.servlet.ServletRequest;
@@ -11,16 +29,19 @@ import org.springframework.web.context.request.ServletRequestAttributes;
  * Abstraction for Spring metadata implementations.
  * 
  * @author <a href="mailto:janith3000@gmail.com">Janith Bandara</a>
+ * 
  * @since 2.4.1
  */
 @Beeta
 public abstract class SpringWebAuditMetadata implements MetaData {
 
     /** default actor name for unidentified actor. */
-    String undefienedActorName = "unedentified";
+    protected String undefienedActorName = "unedentified";
 
     /** Default name for unidentified origin. */
-    String undefienedOriginName = "unedentified";
+    protected String undefienedOriginName = "unedentified";
+
+    protected boolean captureUserAgent = false;
 
     /**
      * {@inheritDoc}
@@ -30,9 +51,10 @@ public abstract class SpringWebAuditMetadata implements MetaData {
      */
     @Override
     public String getOrigin() {
+        ServletRequest request = (ServletRequest) ((ServletRequestAttributes) RequestContextHolder
+                .currentRequestAttributes()).getRequest();
         try {
-            return ((ServletRequest) ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes())
-                    .getRequest()).getRemoteAddr();
+            return request.getRemoteAddr();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -57,5 +79,9 @@ public abstract class SpringWebAuditMetadata implements MetaData {
      */
     public void setUndefienedOriginName(String undefinedOriginName) {
         this.undefienedOriginName = undefinedOriginName;
+    }
+
+    public void setCaptureUserAgent(boolean captureUserAgent) {
+        this.captureUserAgent = captureUserAgent;
     }
 }
