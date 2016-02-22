@@ -41,8 +41,6 @@ public abstract class SpringWebAuditMetadata implements MetaData {
     /** Default name for unidentified origin. */
     protected String undefienedOriginName = "unedentified";
 
-    protected boolean captureUserAgent = false;
-
     /**
      * {@inheritDoc}
      * 
@@ -51,10 +49,9 @@ public abstract class SpringWebAuditMetadata implements MetaData {
      */
     @Override
     public String getOrigin() {
-        ServletRequest request = (ServletRequest) ((ServletRequestAttributes) RequestContextHolder
-                .currentRequestAttributes()).getRequest();
         try {
-            return request.getRemoteAddr();
+            return ((ServletRequest) ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes())
+                    .getRequest()).getRemoteAddr();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -79,9 +76,5 @@ public abstract class SpringWebAuditMetadata implements MetaData {
      */
     public void setUndefienedOriginName(String undefinedOriginName) {
         this.undefienedOriginName = undefinedOriginName;
-    }
-
-    public void setCaptureUserAgent(boolean captureUserAgent) {
-        this.captureUserAgent = captureUserAgent;
     }
 }
