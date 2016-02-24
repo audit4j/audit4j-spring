@@ -51,7 +51,7 @@
 
 	<properties>
 		<junit.version>4.11</junit.version>
-		<audit4j.version>2.4.0</audit4j.version>
+		<audit4j.version>2.4.1-RC3</audit4j.version>
 		<spring.version>4.2.2.RELEASE</spring.version>
 		<spring.security.version>4.0.3.RELEASE</spring.security.version>
 		<aspectj.version>1.8.7</aspectj.version>
@@ -160,9 +160,6 @@
 						<goals>
 							<goal>jar</goal>
 						</goals>
-						<configuration>
-							<additionalparam>-Xdoclint:none</additionalparam>
-						</configuration>
 					</execution>
 				</executions>
 			</plugin>

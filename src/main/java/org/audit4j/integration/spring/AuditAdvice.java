@@ -63,7 +63,6 @@ public class AuditAdvice implements MethodBeforeAdvice {
      */
     @Override
     public void before(final Method method, final Object[] params, final Object arg2) throws Throwable {
-        AuditManager manager = AuditManager.getInstance();
-        manager.audit(method.getClass(), method, params);
+        AuditManager.getInstance().audit(method.getClass(), method, params);
     }
 }
