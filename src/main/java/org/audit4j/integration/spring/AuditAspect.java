@@ -56,7 +56,7 @@ public class AuditAspect {
      * @throws Throwable
      *             the throwable
      */
-    @Before("@within(org.audit4j.core.annotation.Audit) || @annotation(org.audit4j.core.annotation.Audit))")
+    @Before("@within(org.audit4j.core.annotation.Audit) || @annotation(org.audit4j.core.annotation.Audit)")
     public void audit(final JoinPoint jointPoint) throws Throwable {
 
         MethodSignature methodSignature = (MethodSignature) jointPoint.getSignature();
