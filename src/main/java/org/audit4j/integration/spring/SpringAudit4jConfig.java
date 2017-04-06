@@ -20,6 +20,7 @@ package org.audit4j.integration.spring;
 
 import java.util.List;
 
+import org.audit4j.core.AnnotationTransformer;
 import org.audit4j.core.AuditManager;
 import org.audit4j.core.Configuration;
 import org.audit4j.core.MetaData;
@@ -58,6 +59,9 @@ public class SpringAudit4jConfig implements InitializingBean, DisposableBean {
     /** The actor session attribute name. */
     private String actorSessionAttributeName;
 
+    /** Transformer to be used when converting event */
+    private AnnotationTransformer annotationTransformer;
+
     /**
      * Initialize audit4j when starting spring application context.
      * 
@@ -83,6 +87,11 @@ public class SpringAudit4jConfig implements InitializingBean, DisposableBean {
         } else {
             configuration.setMetaData(metaData);
         }
+
+        if (annotationTransformer != null) {
+            configuration.setAnnotationTransformer(annotationTransformer);
+        }
+
         AuditManager.startWithConfiguration(configuration);
     }
 
@@ -164,5 +173,15 @@ public class SpringAudit4jConfig implements InitializingBean, DisposableBean {
      */
     public void setActorSessionAttributeName(String actorSessionAttributeName) {
         this.actorSessionAttributeName = actorSessionAttributeName;
+    }
+
+    /**
+     * Sets the tranformer for converting events. May be left {@code null} and then the default transformer will be
+     * created.
+     *
+     * @param annotationTransformer the transformer to be used
+     */
+    public void setAnnotationTransformer(AnnotationTransformer annotationTransformer) {
+        this.annotationTransformer = annotationTransformer;
     }
 }
