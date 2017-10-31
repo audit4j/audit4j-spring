@@ -19,6 +19,7 @@
 package org.audit4j.integration.spring;
 
 import java.util.List;
+import java.util.Map;
 
 import org.audit4j.core.AuditManager;
 import org.audit4j.core.Configuration;
@@ -27,6 +28,7 @@ import org.audit4j.core.filter.AuditEventFilter;
 import org.audit4j.core.handler.Handler;
 import org.audit4j.core.jmx.JMXConfig;
 import org.audit4j.core.layout.Layout;
+
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 
@@ -55,6 +57,9 @@ public class SpringAudit4jConfig implements InitializingBean, DisposableBean {
     /** The jmx. */
     private JMXConfig jmx;
 
+    /** The properties. */
+    private Map<String, String> properties;
+
     /** The actor session attribute name. */
     private String actorSessionAttributeName;
 
@@ -73,6 +78,7 @@ public class SpringAudit4jConfig implements InitializingBean, DisposableBean {
         configuration.setFilters(filters);
         configuration.setCommands(commands);
         configuration.setJmx(jmx);
+        configuration.setProperties(properties);
 
         if (metaData == null) {
             if (actorSessionAttributeName == null) {
@@ -155,6 +161,17 @@ public class SpringAudit4jConfig implements InitializingBean, DisposableBean {
      */
     public void setJmx(JMXConfig jmx) {
         this.jmx = jmx;
+    }
+
+    /**
+     * Sets the properties.
+     * 
+     * @param properties
+     *            the new properties
+     */
+
+    public void setProperties(Map<String, String> properties) {
+        this.properties = properties;
     }
 
     /**
