@@ -23,7 +23,7 @@
 	<artifactId>audit4j-spring</artifactId>
 	<packaging>jar</packaging>
 	<name>Audit4j - Spring Integration</name>
-	<version>2.4.1</version>
+	<version>2.5.0</version>
 	<url>http://audit4j.org</url>
 	<description>Audit4j - An open-source auditing framework for Java, Spring Integration</description>
 
@@ -73,8 +73,8 @@
 	</ciManagement>
 
 	<properties>
-		<junit.version>4.11</junit.version>
-		<audit4j.version>2.4.1</audit4j.version>
+		<junit.version>4.12</junit.version>
+		<audit4j.version>2.5.0</audit4j.version>
 		<spring.version>4.2.2.RELEASE</spring.version>
 		<spring.security.version>4.0.3.RELEASE</spring.security.version>
 		<aspectj.version>1.8.7</aspectj.version>
