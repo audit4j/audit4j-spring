@@ -76,7 +76,7 @@
 		<junit.version>4.11</junit.version>
 		<audit4j.version>2.7.0</audit4j.version>
 		<spring.version>4.2.2.RELEASE</spring.version>
-		<spring.security.version>4.0.3.RELEASE</spring.security.version>
+		<spring.security.version>5.2.10.RELEASE</spring.security.version>
 		<aspectj.version>1.8.7</aspectj.version>
 	</properties>
 
